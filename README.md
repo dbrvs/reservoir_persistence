@@ -1,2 +1,2 @@
 # reservoir_persistence
-code for reservoir persistence paper
+This is the collection of code for the submitted paper "HIV reservoir ecology shows HIV persists due to infected cell proliferation". The ecological code uses integration sites to develop a model for the distribution of clone sizes from patients with suppressive ART. The model_ode code develops solves a mechanistic mathematical model meant to simulate a latent reservoir and an anatomic sanctuary site permissive of ongoing replication.

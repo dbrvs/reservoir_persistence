@@ -5,7 +5,10 @@ clc; clear;
 data_individual() %loads up the data
 
 dflag=0; %0=DNA 1=Hosmane
+<<<<<<< HEAD
 pflag=1; %1 is to make plots
+=======
+>>>>>>> origin/master
 
 if dflag==0
     %DNA Reservoir parameters
@@ -25,8 +28,12 @@ end
 best_params=zeros(length(data_array),2);
 
 %% loop over data sets
+<<<<<<< HEAD
 for dd=2 %M3-7
 %for dd=1:length(data_array)
+=======
+for dd=1:length(data_array)
+>>>>>>> origin/master
 
     data=-sort(-data_array{dd}); %make sure correctly ranked
 
@@ -37,6 +44,7 @@ for dd=2 %M3-7
     num_samples = sum(data); %number of experimental samplings
 
     % general model parameters
+<<<<<<< HEAD
     num_al=50; num_R=50; num_fits=num_al*num_R;
     R=logspace(3,6,num_R); %richness range
     al=linspace(0.5,2,num_al); %alpha range
@@ -81,4 +89,36 @@ for dd=2 %M3-7
 
     sortedmodels=sort(models);
     best_params(dd,:)=sortedmodels(1,2:3);
+=======
+    num_param=50; num_R=50; num_fits=num_param*num_R;
+    R=logspace(3,6,num_R); %richness range
+    al=linspace(0.5,2,num_param); %alpha range
+    
+ 
+    %% the fitting loop
+    ins=1; %score index
+    score_mat=zeros([num_param,num_R]); %initialize score
+    models=zeros([num_fits,3]); %initialize model list
+    tic
+    for j=1:num_R
+        for i=1:num_param
+            r=1:R(j); %ranks
+            f_r=r.^(-al(i)); %pwl1
+            rms_score=calcscore(f_r,data_pa,num_samples);
+            score_mat(i,j)=rms_score;
+            models(ins,:)=[rms_score al(i) R(j)];
+            ins=ins+1;
+        end
+    %disp(j)
+    end
+    
+    toc
+
+    %% plot best fits
+    filename=fn{dd};
+    best_al(dd)=plotter(R,L0,al,score_mat,models,...
+                                num_samples,data_r,data,data_cpa,filename);
+
+
+>>>>>>> origin/master
 end

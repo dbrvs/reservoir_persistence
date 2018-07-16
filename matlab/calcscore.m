@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function rms=calcscore(f_r,data_pa,ns)
 
     pa=f_r/sum(f_r); %normalize the function
@@ -5,6 +6,15 @@ function rms=calcscore(f_r,data_pa,ns)
     num_replicates=10; %how many replicate simulations/fits
     
     rms_score=zeros([num_replicates,1]);
+=======
+function rms_score=fit_calcscore(f_r,data_pa,ns)
+
+    pa=f_r/sum(f_r); %normalize the function
+
+    num_replicates=5; %how many replicate simulations/fits
+
+    rms_score=0; %initialize average for replicates
+>>>>>>> origin/master
     
     for i=1:num_replicates
         
@@ -22,11 +32,19 @@ function rms=calcscore(f_r,data_pa,ns)
         data_cpa=cumsum(sub_mat(1,:));
         sample_cpa=cumsum(sub_mat(2,:));
 
+<<<<<<< HEAD
         rms_score(i)=sqrt(sum((data_cpa-sample_cpa).^2)); %rms score from cpas
         %rms_score=max(abs(data_cpa-sample_cpa)); %KS score from cpas
     end
     
     rms.avg=mean(rms_score); %take average over replicates
     rms.std=std(rms_score); %take average over replicates
+=======
+        rms_score=rms_score+sqrt(sum((data_cpa-sample_cpa).^2)); %rms score from cpas
+        %mscore=max(abs(data_cpa-sample_cpa)); %KS score from cpas
+    end
+    
+    rms_score=rms_score/num_replicates; %take average over replicates
+>>>>>>> origin/master
 
 end
