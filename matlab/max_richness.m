@@ -15,7 +15,12 @@ for j=1:20;
     al(j)=1.1*j/8;
 
     a=r.^(-al(j));
+<<<<<<< HEAD
+    a=round(C*a./sum(a)); 
+    %disp(sum(a))
+=======
     a=round(C*a./sum(a));    
+>>>>>>> origin/master
     maxr_Hos(j)=length(a(a>0));
     
     psi=0.5*(1-R^(1-al(j)))/(C*(al(j)-1));
@@ -23,11 +28,17 @@ for j=1:20;
 
     if mr>C
         maxr_approx(j)=C;
+<<<<<<< HEAD
+        disp('oops')
+=======
+>>>>>>> origin/master
     else
         maxr_approx(j)=mr;
     end
 end
 
+<<<<<<< HEAD
+=======
 subplot(121)
 plot(log10(maxr_Hos),al,'k','LineWidth',2)
 hold on
@@ -38,6 +49,7 @@ ylabel('pwl parameter, \alpha')
 xlim([3,10])
 ylim([0,3])
 
+>>>>>>> origin/master
 % do this approximately for DNA because L=1e9 and it crashes the computer
 phi=1e9; R=1e9;
 for j=1:20;
@@ -52,6 +64,34 @@ for j=1:20;
     end
 end
 
+<<<<<<< HEAD
+%%
+figure(1)
+clf
+
+subplot(121)
+plot(log10(maxr),al,'--r','LineWidth',2)
+xlabel('maximum richness, log_{10}R')
+%ylabel('pwl parameter, \alpha')
+xlim([3,10])
+set(gca,'XTick',linspace(3,10,8))
+ylabel('powerlaw exponent, \alpha')
+ylim([0,3])
+title('total HIV DNA, L=10^9')
+
+subplot(122)
+plot(log10(maxr_Hos),al,'k','LineWidth',2)
+hold on
+plot(log10(maxr_approx),al,'--r','LineWidth',2)
+xlabel('maximum richness, log_{10}R')
+xlim([3,10])
+set(gca,'XTick',linspace(3,10,8))
+ylim([0,3])
+title('replication competent, L=10^7')
+legend('true sum \psi','integral approx')
+
+
+=======
 subplot(122)
 plot(log10(maxr),al,'--r','LineWidth',2)
 xlabel('maximum possible richness')
@@ -76,3 +116,4 @@ set(gcf,...
 
 tightfig;
 print('max_richness_approx','-dpng','-r600') 
+>>>>>>> origin/master

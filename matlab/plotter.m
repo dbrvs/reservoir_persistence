@@ -16,7 +16,11 @@
 %outputs:
 %best_al - the best powerlaw parameter
 
+<<<<<<< HEAD
+function plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
+=======
 function best_al=plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
+>>>>>>> origin/master
     
     %calculate Chao estimate
     n1=length(da(da==1));
@@ -48,9 +52,15 @@ function best_al=plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
         rep_data=rep_data/sum(rep_data); %normalize
 
         %sampled data fit
+<<<<<<< HEAD
+        subplot(222); hold on
+        pl=plot(1:maxd,100*cumsum(rep_data),'LineWidth',1); pl.Color(4) = 0.7;
+        
+=======
         subplot(221); hold on
         pl=plot(1:maxd,100*cumsum(rep_data),'LineWidth',1); pl.Color(4) = 0.7;
 
+>>>>>>> origin/master
         %extrapolate cumulative abundance
         subplot(223); hold on
         m_cpa=cumsum(bm)*100;
@@ -63,6 +73,23 @@ function best_al=plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
     end
 
     %sampled data and best fit cpas
+<<<<<<< HEAD
+    subplot(222)
+    xlabel('sampled rank')
+    ylabel({'sampled cumulative'; 'proportional abundance'})
+    scatter(dr,100*dcpa,20,'sk')
+    xlim([1,dr(end)+1])
+    ylim([-5,110])
+    legend({'m1';'m2';'m3';'m4';'m5';fn})
+    legend('boxoff')
+    legend('Location','SouthEast')
+    set(gca,'XScale','log')
+    
+    %richness and model param heatmap
+    subplot(221)
+    %contourf(log10(R),al,log10(smat),30,'LineColor','none')
+    contourf(log10(R),repmat(al,length(al),1),log10(smat),30,'LineColor','none')
+=======
     subplot(221)
     xlabel('sampled rank')
     ylabel({'sampled cumulative'; 'proportional abundance'})
@@ -73,15 +100,24 @@ function best_al=plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
     %richness and model param heatmap
     subplot(222)
     contourf(log10(R),al,log10(smat),30,'LineColor','none')
+>>>>>>> origin/master
     hold on
     ylabel('model parameter, \alpha')
     xlabel('model richness, log_{10}R')
     colorbar;
     caxis([min(log10(models(:,1))),max(log10(models(:,1)))])
+<<<<<<< HEAD
+    title('log10 rss error')
+    %shade out below R chao
+    if Rchao>min(models(:,3))
+        %shade parts of plot
+        Rshade=linspace(1,log10(Rchao),100);
+=======
     %shade out below R chao
     if Rchao>min(models(:,3))
         %shade parts of plot
         Rshade=linspace(log10(R(1)),log10(Rchao),100);
+>>>>>>> origin/master
         h=area(Rshade,ones([length(Rshade),1])*al(1),al(end));
         set(h(1),'FaceColor','k');
     end
@@ -92,7 +128,11 @@ function best_al=plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
     mrshade=log10(exp(log(psi)./-alr));%approximate log10 max richness
     H=area(fliplr(mrshade),fliplr(alr),alr(end));
     set(H(1),'FaceColor','k');
+<<<<<<< HEAD
+    xlim([1,7])
+=======
     xlim([log10(R(1)),log10(R(end))])
+>>>>>>> origin/master
     ylim([al(1),al(end)])
     %title(['best fit \alpha = ' num2str(best_al) ],'Fontsize',8,'FontWeight','Normal')
 
@@ -118,6 +158,8 @@ function best_al=plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
     ylim([1,L0])
     set(gca,'YTick',logspace(0,ceil(log10(L0)),ceil(log10(L0))+1))
     
+<<<<<<< HEAD
+=======
     %print the figure
     w=7;
     h=6;
@@ -140,5 +182,6 @@ function best_al=plotter(R,L0,al,smat,models,ns,dr,da,dcpa,fn)
 
     %calculate best parameter
     best_al=round(mean(models(bf_idx(1:10),2)),2);
+>>>>>>> origin/master
 
 end
